@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlozamagni/fastify-google-cloud-storage"
+  },
   "keywords": [],
   "author": "Carlo Zamagni",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/storage": "^2.4.2",
-    "fastify-plugin": "^1.5.0"
+    "@google-cloud/storage": "2.4.2",
+    "fastify-plugin": "1.5.0"
   }
 }
