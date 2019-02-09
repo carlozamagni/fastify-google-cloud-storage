@@ -4,7 +4,7 @@
   "description": "Fastify plugin that exposes GCP Cloud Storage.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test.js -R list"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "dependencies": {
     "@google-cloud/storage": "2.4.2",
     "fastify-plugin": "1.5.0"
+  },
+  "devDependencies": {
+    "fastify": "^1.14.1",
+    "tap": "^12.5.2"
   }
 }
