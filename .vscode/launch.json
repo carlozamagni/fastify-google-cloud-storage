@@ -7,17 +7,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "test all",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/tap",
-            "runtimeArgs": [
-                "${workspaceFolder}/test.js"
-            ],
-            "internalConsoleOptions": "openOnSessionStart",
-            "autoAttachChildProcesses": true
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Run test (current)",
             "program": "${workspaceFolder}/${relativeFile}",
             "cwd": "${workspaceFolder}"
