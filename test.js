@@ -14,8 +14,6 @@ t.test('should register', t => {
 
     fastify.register(fastifyGoogleCloudStorage, {
         projectId: testProjectId
-    }, err => {
-        t.error(err)
     })
 
     fastify.ready(err => {

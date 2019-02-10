@@ -17,6 +17,7 @@ function fastifyGoogleCloudStorage(fastify, options, next) {
         fastify.decorate('googleCloudStorage', storage)
     } catch (err) {
         next(err)
+        return
     }
 
     next()
