@@ -1,29 +1,28 @@
 'use strict'
 
-
 const fp = require('fastify-plugin')
 const { Storage } = require('@google-cloud/storage')
 
+
 function fastifyGoogleCloudStorage(fastify, options, next) {
 
-    var gcsOpts = {projectId: options.projectId }
-    if(options.keyFilename){
+    var gcsOpts = { projectId: options.projectId }
+    if (options.keyFilename) {
         gcsOpts.keyFilename = options.keyFilename
     }
 
-    try {
-        const storage = new Storage(gcsOpts)
+    const storage = new Storage(gcsOpts)
+
+    storage.getBuckets((err, _) => {
+        if (err) return next(err)
 
         fastify.decorate('googleCloudStorage', storage)
-    } catch (err) {
-        next(err)
-        return
-    }
 
-    next()
+        next()
+    })
 }
 
 
-module.exports = fp(fastifyGoogleCloudStorage, {  
-    name: 'fastify-google-cloud-storage' 
+module.exports = fp(fastifyGoogleCloudStorage, {
+    name: 'fastify-google-cloud-storage'
 })
