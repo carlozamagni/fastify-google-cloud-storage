@@ -1,6 +1,6 @@
 {
   "name": "fastify-google-cloud-storage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fastify plugin that exposes GCP Cloud Storage.",
   "main": "index.js",
   "scripts": {
