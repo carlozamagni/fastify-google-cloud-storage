@@ -3,26 +3,23 @@
 const fp = require('fastify-plugin')
 const { Storage } = require('@google-cloud/storage')
 
+function fastifyGoogleCloudStorage (fastify, options, next) {
+  const gcsOpts = { projectId: options.projectId }
+  if (options.keyFilename) {
+    gcsOpts.keyFilename = options.keyFilename
+  }
 
-function fastifyGoogleCloudStorage(fastify, options, next) {
+  const storage = new Storage(gcsOpts)
 
-    var gcsOpts = { projectId: options.projectId }
-    if (options.keyFilename) {
-        gcsOpts.keyFilename = options.keyFilename
-    }
+  storage.getBuckets((err, _) => {
+    if (err) return next(err)
 
-    const storage = new Storage(gcsOpts)
+    fastify.decorate('googleCloudStorage', storage)
 
-    storage.getBuckets((err, _) => {
-        if (err) return next(err)
-
-        fastify.decorate('googleCloudStorage', storage)
-
-        next()
-    })
+    next()
+  })
 }
 
-
 module.exports = fp(fastifyGoogleCloudStorage, {
-    name: 'fastify-google-cloud-storage'
+  name: 'fastify-google-cloud-storage'
 })
