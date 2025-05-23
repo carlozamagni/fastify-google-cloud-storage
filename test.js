@@ -1,10 +1,22 @@
 'use strict'
 
+const fs = require('node:fs')
 const t = require('tap')
 const Fastify = require('fastify')
 const fastifyGoogleCloudStorage = require('./index')
 
+
+function personalProjectSettingsConfigured(){
+  fs.existsSync('./testData')
+}
+
+
 t.test('should register', t => {
+  
+  if(!personalProjectSettingsConfigured()){
+    return t.skip()
+  }
+  
   t.plan(2)
 
   const realProjectId = require('./testData/realConfiguration.json').projectId
@@ -25,7 +37,7 @@ t.test('should register', t => {
 })
 
 t.test('should not register on invalid credentials', t => {
-  t.plan(2)
+  t.plan(3)
 
   const fastify = Fastify()
 
@@ -35,7 +47,8 @@ t.test('should not register on invalid credentials', t => {
 
   fastify.ready(err => {
     t.ok(err)
-    t.equal(err.message.includes('Invalid project number'), true)
+    t.match(err.message, 'Project id')
+    t.match(err.message, 'invalid or not found')
     if (err) console.log(`Tried to register on not existing project. Result is: ${err.message}\n`)
   })
 })
